@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
-public class Factura {
+public class Invoice {
     @Id
     private String _id;
     private Date fact_fecha;

@@ -2,7 +2,7 @@ package com.parcialGDB.parcialGDB.model;
 
 import java.util.Date;
 
-public class Dueno {
+public class Owner {
     private String due_nombre;
     private String due_documento;
     private String due_telefono;

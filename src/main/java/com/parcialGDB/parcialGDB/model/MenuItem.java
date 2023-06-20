@@ -2,7 +2,7 @@ package com.parcialGDB.parcialGDB.model;
 
 import org.springframework.data.annotation.Id;
 
-public class Menu {
+public class MenuItem {
     @Id
     private String _id;
     private String prod_nombre;

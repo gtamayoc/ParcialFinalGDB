@@ -3,11 +3,10 @@ package com.parcialGDB.parcialGDB.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
 import java.util.List;
 
 @Document(collection = "restaurantes")
-public class Acceso {
+public class Access {
     @Id
     private String _id;
     private String correo;

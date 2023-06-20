@@ -5,19 +5,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection = "nombre_coleccion")
+@Document(collection = "restaurants")
 public class Restaurante {
     @Id
     private String id;
-    private String rest_nombre;
-    private String rest_direccion;
-    private String rest_horario_atencion;
-    private List<Dueno> duenos;
-    private List<Factura> facturas;
-    private List<ReservaCliente> reservas_cliente;
-    private List<Menu> menu;
-    private List<Acceso> accesos;
-    private List<PedidoCliente> pedidos_clientes;
+    private String restName;
+    private String restAddress;
+    private String restOpeningHours;
+    private List<Owner> owners;
+    private List<Invoice> invoices;
+    private List<CustomerReservation> customerReservations;
+    private List<MenuItem> menu;
+    private List<Access> accesses;
+    private List<CustomerOrder> customerOrders;
 
     public String getId() {
         return id;
@@ -27,75 +27,75 @@ public class Restaurante {
         this.id = id;
     }
 
-    public String getRest_nombre() {
-        return rest_nombre;
+    public String getRestName() {
+        return restName;
     }
 
-    public void setRest_nombre(String rest_nombre) {
-        this.rest_nombre = rest_nombre;
+    public void setRestName(String restName) {
+        this.restName = restName;
     }
 
-    public String getRest_direccion() {
-        return rest_direccion;
+    public String getRestAddress() {
+        return restAddress;
     }
 
-    public void setRest_direccion(String rest_direccion) {
-        this.rest_direccion = rest_direccion;
+    public void setRestAddress(String restAddress) {
+        this.restAddress = restAddress;
     }
 
-    public String getRest_horario_atencion() {
-        return rest_horario_atencion;
+    public String getRestOpeningHours() {
+        return restOpeningHours;
     }
 
-    public void setRest_horario_atencion(String rest_horario_atencion) {
-        this.rest_horario_atencion = rest_horario_atencion;
+    public void setRestOpeningHours(String restOpeningHours) {
+        this.restOpeningHours = restOpeningHours;
     }
 
-    public List<Dueno> getDuenos() {
-        return duenos;
+    public List<Owner> getOwners() {
+        return owners;
     }
 
-    public void setDuenos(List<Dueno> duenos) {
-        this.duenos = duenos;
+    public void setOwners(List<Owner> owners) {
+        this.owners = owners;
     }
 
-    public List<Factura> getFacturas() {
-        return facturas;
+    public List<Invoice> getInvoices() {
+        return invoices;
     }
 
-    public void setFacturas(List<Factura> facturas) {
-        this.facturas = facturas;
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 
-    public List<ReservaCliente> getReservas_cliente() {
-        return reservas_cliente;
+    public List<CustomerReservation> getCustomerReservations() {
+        return customerReservations;
     }
 
-    public void setReservas_cliente(List<ReservaCliente> reservas_cliente) {
-        this.reservas_cliente = reservas_cliente;
+    public void setCustomerReservations(List<CustomerReservation> customerReservations) {
+        this.customerReservations = customerReservations;
     }
 
-    public List<Menu> getMenu() {
+    public List<MenuItem> getMenu() {
         return menu;
     }
 
-    public void setMenu(List<Menu> menu) {
+    public void setMenu(List<MenuItem> menu) {
         this.menu = menu;
     }
 
-    public List<Acceso> getAccesos() {
-        return accesos;
+    public List<Access> getAccesses() {
+        return accesses;
     }
 
-    public void setAccesos(List<Acceso> accesos) {
-        this.accesos = accesos;
+    public void setAccesses(List<Access> accesses) {
+        this.accesses = accesses;
     }
 
-    public List<PedidoCliente> getPedidos_clientes() {
-        return pedidos_clientes;
+    public List<CustomerOrder> getCustomerOrders() {
+        return customerOrders;
     }
 
-    public void setPedidos_clientes(List<PedidoCliente> pedidos_clientes) {
-        this.pedidos_clientes = pedidos_clientes;
+    public void setCustomerOrders(List<CustomerOrder> customerOrders) {
+        this.customerOrders = customerOrders;
     }
 }

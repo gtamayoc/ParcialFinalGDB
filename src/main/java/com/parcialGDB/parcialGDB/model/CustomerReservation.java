@@ -2,11 +2,11 @@ package com.parcialGDB.parcialGDB.model;
 
 import org.springframework.data.annotation.Id;
 
-public class PedidoCliente {
+public class CustomerReservation {
     @Id
     private String _id;
     private Cliente cliente;
-    private Pedido pedido;
+    private Reserva reserva;
 
     public String get_id() {
         return _id;
@@ -24,11 +24,11 @@ public class PedidoCliente {
         this.cliente = cliente;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public Reserva getReserva() {
+        return reserva;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
     }
 }

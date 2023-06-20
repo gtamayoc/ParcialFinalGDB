@@ -1,13 +1,12 @@
 package com.parcialGDB.parcialGDB.controller;
 
 import com.mongodb.client.MongoCollection;
-import com.parcialGDB.parcialGDB.model.Acceso;
+import com.mongodb.client.MongoDatabase;
+import com.parcialGDB.parcialGDB.model.Access;
+import com.parcialGDB.parcialGDB.model.Restaurante;
 import com.parcialGDB.parcialGDB.repository.loginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/login")
@@ -15,23 +14,30 @@ public class login {
 
     private final loginRepository loginRepository;
 
+
     @Autowired
-    private MongoCollection<Acceso> accesoCollection;
+    private MongoDatabase mongoDatabase;
 
     @Autowired
     public login(loginRepository loginRepository) {
         this.loginRepository = loginRepository;
     }
 
-    @GetMapping("/accesos")
-    public List<Acceso> obtenerAccesosConMQL() {
-        return accesoCollection.find().into(new ArrayList<>());
+    @GetMapping("/data")
+    public String getData() {
+        MongoCollection<Restaurante> collection = mongoDatabase.getCollection("restaurantes", Restaurante.class);
+
+        StringBuilder result = new StringBuilder();
+        for (Restaurante restaurante : collection.find()) {
+            result.append(restaurante.toString()).append("\n");
+        }
+
+        return result.toString();
     }
 
-
     @PostMapping("/")
-    public Acceso registrarAcceso(@RequestBody Acceso acceso) throws Exception {
-        Acceso accesoExistente = loginRepository.findByCorreoAndClave(acceso.getCorreo(), acceso.getClave());
+    public Access registrarAcceso(@RequestBody Access acceso) throws Exception {
+        Access accesoExistente = loginRepository.findByCorreoAndClave(acceso.getCorreo(), acceso.getClave());
 
         if (accesoExistente != null) {
             throw new Exception("Ya existe un acceso con el mismo correo y clave");
@@ -43,7 +49,7 @@ public class login {
         return loginRepository.save(acceso);
     }
 
-    private boolean esValido(Acceso acceso) {
+    private boolean esValido(Access acceso) {
         if (acceso.getCorreo() == null || acceso.getCorreo().isEmpty()) {
             return false;
         }
