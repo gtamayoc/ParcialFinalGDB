@@ -13,4 +13,4 @@ public interface loginRepository extends MongoRepository<Acceso, String> {
 
     @Query(value = "{}")
     List<Acceso> obtenerTodosLosAccesos();
-}   
+}
