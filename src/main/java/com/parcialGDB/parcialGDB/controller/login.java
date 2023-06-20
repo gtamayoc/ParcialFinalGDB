@@ -1,38 +1,50 @@
 package com.parcialGDB.parcialGDB.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.parcialGDB.parcialGDB.model.Access;
 import com.parcialGDB.parcialGDB.model.Restaurante;
 import com.parcialGDB.parcialGDB.repository.loginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/auth")
 public class login {
 
     private final loginRepository loginRepository;
 
-
     @Autowired
     private MongoDatabase mongoDatabase;
 
+    private final ObjectMapper objectMapper;
+
     @Autowired
-    public login(loginRepository loginRepository) {
+    public login(loginRepository loginRepository, ObjectMapper objectMapper) {
         this.loginRepository = loginRepository;
+        this.objectMapper = objectMapper;
     }
 
-    @GetMapping("/data")
-    public String getData() {
-        MongoCollection<Restaurante> collection = mongoDatabase.getCollection("restaurantes", Restaurante.class);
+    @GetMapping("/login")
+    public ResponseEntity<String> getData() {
+        MongoCollection<Restaurante> collection = mongoDatabase.getCollection("restaurants", Restaurante.class);
 
-        StringBuilder result = new StringBuilder();
-        for (Restaurante restaurante : collection.find()) {
-            result.append(restaurante.toString()).append("\n");
+        List<Restaurante> restaurantes = new ArrayList<>();
+        collection.find().iterator().forEachRemaining(restaurantes::add);
+
+        try {
+            String json = objectMapper.writeValueAsString(restaurantes);
+            return ResponseEntity.ok(json);
+        } catch (JsonProcessingException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error converting to JSON");
         }
-
-        return result.toString();
     }
 
     @PostMapping("/")

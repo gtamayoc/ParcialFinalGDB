@@ -2,6 +2,7 @@ package com.parcialGDB.parcialGDB.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
@@ -9,14 +10,32 @@ import java.util.List;
 public class Restaurante {
     @Id
     private String id;
+
+    @Field("rest_name")  // Nombre del campo ajustado
     private String restName;
+
+    @Field("rest_address")  // Nombre del campo ajustado
     private String restAddress;
+
+    @Field("rest_opening_hours")  // Nombre del campo ajustado
     private String restOpeningHours;
+
+    @Field("owners")
     private List<Owner> owners;
+
+    @Field("invoices")
     private List<Invoice> invoices;
+
+    @Field("customer_reservations")
     private List<CustomerReservation> customerReservations;
+
+    @Field("menu")
     private List<MenuItem> menu;
+
+    @Field("accesses")
     private List<Access> accesses;
+
+    @Field("customer_orders")
     private List<CustomerOrder> customerOrders;
 
     public String getId() {
